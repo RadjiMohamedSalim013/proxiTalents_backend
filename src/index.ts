@@ -1,17 +1,19 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { connectMongoDB } from './config/db';
+const PORT = process.env.PORT ;
 
 dotenv.config();
+
 const app = express();
 
 app.use(express.json());
 
-const PORT = process.env.PORT ;
+// Connexion à la base de données MongoDB
+connectMongoDB();
 
-app.get('/', (req, res) => {
-  res.send('API  backend fonctionne !');
-});
 
 app.listen(PORT, () => {
   console.log(`Serveur lancé sur le port ${PORT}`);
 });
+
