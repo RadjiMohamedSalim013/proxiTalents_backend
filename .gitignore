@@ -7,9 +7,7 @@ dist/
 # Environment variables
 .env
 
-# Logs
-logs/
-*.log
+
 
 # OS / IDE
 .DS_Store

@@ -1,6 +1,6 @@
 import express from 'express';
 import { validerInscription } from '../middlewares/validateRegister.middleware';
-import { forgotPassword, loginUser, registerUser, resetPassword } from '../controllers/auth.controller';
+import {changerMotDePasseController, forgotPassword, loginUser, registerUser, resetPassword } from '../controllers/auth.controller';
 import { validateLogin } from '../middlewares/validateLogin.middleware';
 import { validateResetToken } from '../middlewares/validateResetToken.middleware';
 
@@ -15,6 +15,8 @@ router.post('/login',  validateLogin, loginUser);
 router.post('/forgot-password', forgotPassword)
 
 router.post('/reset-password/:token', validateResetToken, resetPassword);
+
+router.put('/changer-mot-de-passe', changerMotDePasseController);
 
 
 export default router;

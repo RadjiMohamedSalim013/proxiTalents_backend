@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction  } from 'express';
 import crypto from 'crypto';
 import { registerUserService } from '../services/auth/registerUser.service';
 import { loginUserService } from '../services/auth/loginUser.service';
@@ -6,7 +6,7 @@ import { User } from '../models/user.model';
 import { envoyerEmailReinitialisation } from '../services/auth/email.service';
 import bcrypt from 'bcryptjs';
 import { resetPasswordService } from '../services/auth/resetPassword.service';
-
+import { changerMotDePasse } from '../services/auth/changePassword.service';
 
 
 // inscription 
@@ -77,3 +77,17 @@ export const resetPassword = async (req: Request, res: Response): Promise<void> 
     res.status(500).json({ message: "Erreur lors de la réinitialisation du mot de passe.", erreur: error });
   }
 };
+
+
+//changer mot de passe
+export const changerMotDePasseController = async (req: Request, res: Response) => {
+  const { email, ancienMotDePasse, nouveauMotDePasse } = req.body;
+
+  try {
+    const result = await changerMotDePasse(email, ancienMotDePasse, nouveauMotDePasse);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
