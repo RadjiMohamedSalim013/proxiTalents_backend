@@ -1,11 +1,13 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-//Interface TypeScript pour un utilisateur
+// Interface TypeScript pour un utilisateur
 export interface IUser extends Document {
   nom: string;
   email: string;
   motDePasse: string;
   role: 'utilisateur' | 'prestataire' | 'entreprise';
+  resetToken?: string;
+  resetTokenExpiration?: Date;
 }
 
 // Schéma Mongoose 
@@ -33,9 +35,15 @@ const userSchema = new Schema<IUser>(
       enum: ['utilisateur', 'prestataire', 'entreprise'], 
       default: 'utilisateur',
     },
+    resetToken: {
+      type: String,
+    },
+    resetTokenExpiration: {
+      type: Date,
+    },
   },
   {
-    timestamps: true, 
+    timestamps: true,
   }
 );
 
