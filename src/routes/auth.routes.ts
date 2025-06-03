@@ -3,6 +3,7 @@ import { validerInscription } from '../middlewares/validateRegister.middleware';
 import {changerMotDePasseController, forgotPassword, loginUser, registerUser, resetPassword } from '../controllers/auth.controller';
 import { validateLogin } from '../middlewares/validateLogin.middleware';
 import { validateResetToken } from '../middlewares/validateResetToken.middleware';
+import { authMiddleware } from '../middlewares/auth.middleware';
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const router = express.Router();
 router.post('/register', validerInscription, registerUser);
 
 // Route de connexion
-router.post('/login',  validateLogin, loginUser);
+router.post('/login',  validateLogin, loginUser, authMiddleware);
 
 router.post('/forgot-password', forgotPassword)
 

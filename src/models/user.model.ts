@@ -1,7 +1,8 @@
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Document, Schema, Types } from 'mongoose';
 
 // Interface TypeScript pour un utilisateur
 export interface IUser extends Document {
+  _id: Types.ObjectId;
   nom: string;
   email: string;
   motDePasse: string;

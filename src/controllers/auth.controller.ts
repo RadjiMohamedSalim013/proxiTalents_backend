@@ -11,8 +11,10 @@ import { changerMotDePasse } from '../services/auth/changePassword.service';
 
 // inscription 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
+  console.log(req.body)
   try {
     await registerUserService(req.body);
+    
     res.status(201).json({ message: 'Utilisateur inscrit avec succès' });
   } catch (error: any) {
     res.status(400).json({ message: error.message || 'Erreur lors de l\'inscription' });

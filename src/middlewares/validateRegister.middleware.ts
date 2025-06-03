@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-const rolesAutorises = ['particulier', 'prestataire', 'entreprise'];
+const rolesAutorises = ['utilisateur', 'prestataire', 'entreprise'];
 
 export const validerInscription = (req: Request, res: Response, next: NextFunction): void => {
   const { nom, email, motDePasse, role } = req.body;

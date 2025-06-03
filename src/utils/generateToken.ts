@@ -5,3 +5,4 @@ export const generateToken = (userId: string): string => {
         expiresIn: '7d',
     });
 };
+ 
