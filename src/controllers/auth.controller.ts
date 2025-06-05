@@ -9,7 +9,21 @@ import { resetPasswordService } from '../services/auth/resetPassword.service';
 import { changerMotDePasse } from '../services/auth/changePassword.service';
 
 
-// inscription 
+
+/**
+ * Gère les requêtes d'inscription utilisateur.
+ *
+ * Reçoit les données utilisateur depuis le corps de la requête, tente d'inscrire l'utilisateur via
+ * `registerUserService`, et envoie une réponse HTTP appropriée.
+ *
+ * @param req - Objet requête Express contenant les données d'inscription dans le body.
+ * @param res - Objet réponse Express utilisé pour envoyer la réponse HTTP.
+ * @returns Une promesse qui se résout lorsque la réponse est envoyée.
+ *
+ * @remarks
+ * - En cas de succès, répond avec HTTP 201 et un message de succès.
+ * - En cas d'échec, répond avec HTTP 400 et un message d'erreur.
+ */
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
   console.log(req.body)
   try {

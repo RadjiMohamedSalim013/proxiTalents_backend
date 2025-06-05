@@ -1,10 +1,12 @@
 import mongoose, { Document, Schema, Types } from 'mongoose';
 
+
 // Interface TypeScript pour un utilisateur
 export interface IUser extends Document {
   _id: Types.ObjectId;
   nom: string;
   email: string;
+  telephone?: string;
   motDePasse: string;
   role: 'utilisateur' | 'prestataire' | 'entreprise';
   resetToken?: string;
@@ -12,13 +14,13 @@ export interface IUser extends Document {
 }
 
 // Schéma Mongoose 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema(
   {
     nom: {
       type: String,
       required: true,
     },
-    email: {
+  email: {
       type: String,
       required: true,
       unique: true,
@@ -27,6 +29,10 @@ const userSchema = new Schema<IUser>(
         'Veuillez entrer une adresse email valide.',
       ],
     },
+  telephone: {
+    type: String,
+    required: false,
+  },
     motDePasse: {
       type: String,
       required: true,

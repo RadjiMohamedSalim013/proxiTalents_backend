@@ -32,4 +32,5 @@ export type IPrestataireCreation = {
   noteMoyenne?: number;
   nombreAvis?: number;
   verified?: boolean;
+  telephone?: string;
 };
