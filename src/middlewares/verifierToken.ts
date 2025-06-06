@@ -12,7 +12,9 @@ export const verifierToken = (req: Request, res: Response, next: NextFunction) =
   }
 
   try {
+    console.log('Token reçu dans verifierToken:', token);
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+    console.log('Token décodé dans verifierToken:', decoded);
 
     // Vérifie que le payload est un objet
     if (typeof decoded === 'string') {
@@ -25,6 +27,7 @@ export const verifierToken = (req: Request, res: Response, next: NextFunction) =
 
     next();
   } catch (error) {
+     console.error('Erreur dans verifierToken:', error);
      res.status(403).json({ message: 'Token invalide' });
      return
   }

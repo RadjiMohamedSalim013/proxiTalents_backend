@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ajouterPrestataire, getPrestataires, updatePrestataire, ajouterService, getPrestataireById } from '../controllers/prestataire.controller';
+import { ajouterPrestataire, getPrestataires, updatePrestataire, ajouterService, getPrestataireById, getPrestataireByUser } from '../controllers/prestataire.controller';
 import { validateResetToken } from '../middlewares/validateResetToken.middleware';
 import { authMiddleware } from '../middlewares/auth.middleware';
 import { upload } from '../middlewares/upload.middleware';
@@ -14,6 +14,9 @@ router.get('/', authMiddleware, getPrestataires);
 
 // Route pour récupérer un prestataire par id (authentifié)
 router.get('/:id', authMiddleware, getPrestataireById);
+
+// Route pour récupérer le profil prestataire de l'utilisateur connecté (authentifié)
+router.get('/user/profile', authMiddleware, getPrestataireByUser);
 
 // Route pour modifier un profil prestataire (authentifié)
 router.put('/', authMiddleware, updatePrestataire);

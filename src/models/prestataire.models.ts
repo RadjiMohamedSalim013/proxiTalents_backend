@@ -25,7 +25,7 @@ export interface IPrestataire extends Document {
   userId: mongoose.Types.ObjectId;
   titre?: string;
   bio?: string;
-  zoneGeographique?: string;
+  zoneGeographique?: string; 
   ville?: string;
   services: IService[];
   medias?: IMedia[];

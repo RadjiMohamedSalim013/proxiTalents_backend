@@ -4,6 +4,8 @@ import { connectMongoDB } from './config/db';
 import authRoutes from './routes/auth.routes';
 import userRoutes  from './routes/user.routes';
 import prestataireRoutes from './routes/prestataire.route';
+import entrepriseRoutes from './routes/entreprise.route';
+import offreEmploiRoutes from './routes/offreEmploi.route';
 
 import cors from 'cors';
 
@@ -28,7 +30,8 @@ connectMongoDB();
 app.use('/api/auth', authRoutes);
 app.use('/api/utilisateur', userRoutes);
 app.use('/api/prestataires', prestataireRoutes);
-
+app.use('/api/entreprises', entrepriseRoutes);
+app.use('/api/offres', offreEmploiRoutes);
 
 
 app.listen(PORT, () => {

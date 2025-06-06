@@ -5,9 +5,9 @@ const rolesAutorises = ['utilisateur', 'prestataire', 'entreprise'];
 export const validerInscription = (req: Request, res: Response, next: NextFunction): void => {
   const { nom, email, motDePasse, role } = req.body;
 
-  // Vérification des champs requis
-  if (!nom || !email || !motDePasse || !role) {
-    res.status(400).json({ message: "Nom, email, mot de passe et rôle sont obligatoires." });
+  // Vérification des champs requis (role devient optionnel)
+  if (!nom || !email || !motDePasse) {
+    res.status(400).json({ message: "Nom, email et mot de passe sont obligatoires." });
     return;
   }
 
@@ -24,8 +24,8 @@ export const validerInscription = (req: Request, res: Response, next: NextFuncti
     return;
   }
 
-  // Vérification du rôle
-  if (!rolesAutorises.includes(role)) {
+  // Vérification du rôle si présent
+  if (role && !rolesAutorises.includes(role)) {
     res.status(400).json({ message: 'Rôle invalide.' });
     return;
   }

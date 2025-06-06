@@ -78,3 +78,13 @@ export const ajouterServicePrestataire = async (
   prestataire.services.push(service);
   return await prestataire.save();
 };
+
+/**
+ * Récupère le profil prestataire par ID utilisateur.
+ * @param userId - L'identifiant MongoDB de l'utilisateur lié
+ * @returns Le profil prestataire ou null
+ */
+export const getPrestataireByUserId = async (userId: string | Types.ObjectId) => {
+  const objectId = typeof userId === 'string' ? new Types.ObjectId(userId) : userId;
+  return await Prestataire.findOne({ userId: objectId }).populate('userId', 'nom telephone email').exec();
+};

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ajouterProfilPrestataire, getAllPrestataires, updateProfilPrestataire, ajouterServicePrestataire } from '../services/prestataire/prestataire.service';
+import { ajouterProfilPrestataire, getAllPrestataires, updateProfilPrestataire, ajouterServicePrestataire, getPrestataireByUserId } from '../services/prestataire/prestataire.service';
 import { IUtilisateurRequest } from '../types/express/index';
 import type { IPrestataireCreation, IMedia, IService } from '../types/prestataire.type';
 import { Prestataire } from '../models/prestataire.models';
@@ -149,6 +149,29 @@ export const getPrestataireById = async (
     res.status(200).json(prestataire);
   } catch (erreur) {
     console.error('Erreur lors de la récupération du prestataire :', erreur);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+
+// New controller method to get prestataire profile by user ID
+export const getPrestataireByUser = async (
+  req: IUtilisateurRequest,
+  res: Response
+): Promise<void> => {
+  try {
+    const utilisateur = req.utilisateur;
+    if (!utilisateur || !utilisateur._id) {
+      res.status(401).json({ message: 'Utilisateur non authentifié.' });
+      return;
+    }
+    const prestataire = await getPrestataireByUserId(utilisateur._id);
+    if (!prestataire) {
+      res.status(404).json({ message: 'Profil prestataire non trouvé.' });
+      return;
+    }
+    res.status(200).json(prestataire);
+  } catch (error) {
+    console.error('Erreur lors de la récupération du profil prestataire par utilisateur :', error);
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };

@@ -3,9 +3,13 @@ import { User } from '../../models/user.model';
 import { IUser } from '../../types/user.types';
 
 export const registerUserService = async (userData: IUser): Promise<void> => {
-  const { nom, email, motDePasse, role } = userData;
+  let { nom, email, motDePasse, role } = userData;
   console.log('Role reçu:', role);
 
+  // Définir le rôle par défaut si non fourni
+  if (!role) {
+    role = 'utilisateur';
+  }
 
   // Vérifie si utilisateur existe déjà
   const existingUser = await User.findOne({ email });
